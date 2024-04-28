@@ -6,7 +6,7 @@ import Image from "next/image";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 
-const OnBoardingData: OnBoardingData = [
+const onBoardingData: OnBoardingData = [
   {
     title: "Welcome Message",
     content: [
@@ -148,7 +148,7 @@ const OnBoardingPage = () => {
               setIsFinish(true);
               console.log(res);
             }}
-            data={OnBoardingData}
+            data={onBoardingData}
           />
         )}
       </div>
