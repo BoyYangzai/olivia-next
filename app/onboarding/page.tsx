@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import OnBoarding, { OnBoardingData } from "../../components/OnBoarding";
+import OnBoarding from "../../components/OnBoarding";
 import { Progress } from "antd";
 import Image from "next/image";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
+import { OnBoardingData } from "../../components/OnBoarding/type";
 
 const onBoardingData: OnBoardingData = [
   {
@@ -122,7 +123,11 @@ const OnBoardingPage = () => {
         {isFinish ? (
           <div className="w-full h-full flex justify-center items-start flex-wrap">
             <div className="w-full -translate-y-2.5">
-              <Progress percent={100} strokeColor={"black"} showInfo={false} />
+              <Progress
+                percent={100}
+                strokeColor={"#FD2D55"}
+                showInfo={false}
+              />
             </div>
             <div className="w-full flex justify-center items-center flex-wrap -mt-8">
               <Image
