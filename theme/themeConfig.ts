@@ -5,9 +5,9 @@ const theme: ThemeConfig = {
   token: {},
   components: {
     Button: {
-      colorPrimary: "#2e6a50",
-      colorPrimaryHover: "green",
-      colorPrimaryActive: "green",
+      colorPrimary: "#FD2D55",
+      colorPrimaryHover: "#FD2D55",
+      colorPrimaryActive: "#FD2D55",
     },
   },
 };

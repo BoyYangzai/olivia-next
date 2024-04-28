@@ -11,7 +11,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="w-full h-screen flex justify-center items-center bg-white">
+      <body className="w-full h-screen flex justify-center items-center bg-bg">
         <AntdRegistry>
           <AntdConfigProvider theme={antdTheme}>{children}</AntdConfigProvider>
         </AntdRegistry>

@@ -6,13 +6,19 @@ import Password from "antd/es/input/Password";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
+import { useState } from "react";
 const Login = () => {
   const [form] = Form.useForm();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = () => {
-    router.push("/onboarding");
     setCookie("session", "value");
+    setLoading(true);
+    setTimeout(() => {
+      router.push("/onboarding");
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -28,21 +34,26 @@ const Login = () => {
           <Form.Item label="PassWord" className="font-bold">
             <Password placeholder="password" className="h-10 font-medium" />
           </Form.Item>
-          <Form.Item>
+          <Form.Item className="flex justify-center items-center">
             <Button
               type="primary"
               style={{
+                width: "20rem",
                 height: "2.5rem",
                 fontWeight: "bold",
               }}
               onClick={handleLogin}
+              loading={loading}
             >
-              Hello Olivia
+              Start Olivia
             </Button>
           </Form.Item>
         </Form>
-        <Link className="w-full text-xs text-[#8b8b8b]" href="/signup">
-          New here? Start the journey now
+        <Link
+          className="w-full text-xs text-[#8b8b8b] text-center"
+          href="/signup"
+        >
+          <span className="text-primary">New here?</span> Start the journey now
         </Link>
       </div>
     </div>
