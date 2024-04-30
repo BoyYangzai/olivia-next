@@ -19,3 +19,8 @@ export interface OnBoardingItemData {
 }
 
 export type OnBoardingData = OnBoardingItemData[];
+
+export type OnBoardingGroupData = {
+  groupTitle: string;
+  data: OnBoardingData;
+}[];

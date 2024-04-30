@@ -1,24 +1,48 @@
 "use client";
-import { LeftOutlined } from "@ant-design/icons";
-import { Progress } from "antd";
+import { Progress, Steps } from "antd";
 import { useEffect, useState } from "react";
-import { OnBoardingData } from "./type";
+import { OnBoardingData, OnBoardingGroupData } from "./type";
 import OnBoardingItem from "./onBoardingItem";
+import Image from "next/image";
 
 const OnBoarding = ({
   data,
   onFinish,
   animation,
+  groupData,
 }: {
-  data: OnBoardingData;
+  data?: OnBoardingData;
+  groupData?: OnBoardingGroupData;
   onFinish?: (res: string[]) => void;
   animation?: "fade" | "slide";
 }) => {
   const [index, setIndex] = useState(0);
+
+  const mergedData =
+    data ?? groupData?.flatMap((group) => group.data) ?? ([] as OnBoardingData);
+
+  let lastGroupPosition = 0;
+  const nextGroupPosition = groupData?.map((group) => {
+    lastGroupPosition += group.data.length;
+    return lastGroupPosition;
+  });
+
+  // start from 0
+  const currentGroupIndex =
+    nextGroupPosition?.findLastIndex((pos) => pos < index) ?? 0;
+
+  const groupTitle = groupData?.map((group) => group.groupTitle);
+  // 只有当前 Index 的 title 会出现 其余的为空
+  const mergedGroupTitle = groupTitle?.map((title, index) => {
+    return {
+      title: index === currentGroupIndex + 1 ? title : "",
+    };
+  });
+  // onBoarding CP
   const [selectedResult, setSelectedResult] = useState<string[] | null>(null);
-  const percent = (index / data.length) * 100;
+  const percent = (index / mergedData.length) * 100;
   const handleSelect = (res?: string) => {
-    if (index <= data.length - 1) {
+    if (index <= mergedData.length - 1) {
       setSelectedResult([...(selectedResult ?? []), res!].filter(Boolean));
     }
   };
@@ -28,7 +52,7 @@ const OnBoarding = ({
 
   useEffect(() => {
     if (selectedResult) {
-      if (index + 1 === data.length) {
+      if (index + 1 === mergedData?.length) {
         onFinish?.(selectedResult);
       }
       setIndex(index + 1);
@@ -36,18 +60,54 @@ const OnBoarding = ({
   }, [selectedResult]);
 
   return (
-    <div className="w-full h-full flex justify-center items-start flex-wrap">
+    <div className="w-full h-full flex-row justify-center items-start flex-wrap">
       <div className="w-full -translate-y-3">
         <Progress percent={percent} strokeColor={"#ea445a"} showInfo={false} />
-        <div className="text-lg ml-4">
-          {index > 0 && <LeftOutlined onClick={handleBack} />}
+        <div className="text-lg ml-2 md:hidden">
+          {index > 0 && (
+            <div className="flex ">
+              <Image
+                src="/svg/arrow-left.svg"
+                alt=""
+                width={20}
+                height={20}
+                onClick={handleBack}
+              ></Image>
+            </div>
+          )}
         </div>
       </div>
-      <OnBoardingItem
-        data={data?.[index]}
-        onClick={handleSelect}
-        animation={animation}
-      />
+      <div className="w-full flex justify-center items-center -translate-y-4">
+        <div className="w-80 md:w-[100%]">
+          <Steps
+            size="small"
+            type="navigation"
+            current={currentGroupIndex + 1}
+            items={mergedGroupTitle}
+            responsive={false}
+          />
+        </div>
+      </div>
+      <div className="w-full justify-center items-center text-lg ml-2 hidden md:flex translate-y-20">
+        {index > 0 && (
+          <div className="w-[60rem] flex cursor-pointer" onClick={handleBack}>
+            <Image
+              src="/svg/arrow-left.svg"
+              alt=""
+              width={20}
+              height={20}
+            ></Image>
+            <span className="text-sm text-[#828282] ml-2">Back</span>
+          </div>
+        )}
+      </div>
+      <div className="flex justify-center items-center mt-24 md:mt-40">
+        <OnBoardingItem
+          data={mergedData?.[index]}
+          onClick={handleSelect}
+          animation={animation}
+        />
+      </div>
     </div>
   );
 };

@@ -9,6 +9,9 @@ const theme: ThemeConfig = {
       colorPrimaryHover: "#FD2D55",
       colorPrimaryActive: "#FD2D55",
     },
+    Steps: {
+      colorPrimary: "#FD2D55",
+    },
   },
 };
 

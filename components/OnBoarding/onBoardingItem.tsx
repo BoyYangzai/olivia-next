@@ -125,15 +125,17 @@ const OnBoardingItem = ({
       {...Animation}
       key={key}
     >
-      <motion.div
+      {/* <motion.div
         className="w-full fmx-auto mb-2 text-sm text-transparent opacity-zero bg-clip-text bg-gradient-to-r from-teal-400 via-blue-500 to-indigo-600 text-center"
         {...Animation}
+        key={key + "title"}
       >
         {title}
-      </motion.div>
+      </motion.div> */}
       <motion.div
         className={`w-[18rem] md:w-[40rem] text-center font-semibold text-lg`}
         {...Animation}
+        key={key + "content"}
       >
         {typeof content === "string"
           ? content
@@ -155,7 +157,10 @@ const OnBoardingItem = ({
               );
             })}
       </motion.div>
-      <div className="w-full flex justify-center flex-wrap mt-10">
+      <div
+        className="w-full flex justify-center flex-wrap mt-6"
+        key={key + "main"}
+      >
         {renderMain()}
       </div>
     </motion.div>
