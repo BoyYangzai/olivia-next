@@ -95,36 +95,6 @@ const OnBoardingPage = () => {
       ],
     },
     {
-      groupTitle: "Olivia Star",
-      data: [
-        {
-          title: "Post-Questionnaire Reassurance",
-          content:
-            "Thank you for your openness. You've earned 25 stars towards new sessions and resources.",
-        },
-        {
-          title: "Introduction to the Star System",
-          content:
-            "Earn stars for engagement and progress. They're milestones on your growth journey.",
-        },
-        {
-          title: "Encouragement and Motivation",
-          content:
-            "You're not alone. Your first step has earned you 15 stars towards meaningful progress.",
-        },
-        {
-          title: "Transition to Program Recommendation",
-          content:
-            "Let's explore tailored options for your well-being journey together.",
-        },
-        {
-          title: "Olivia's Daily Motivation and Reminder Prompt",
-          content:
-            "Each session you complete earns you a 'Star of Progress'. Let's celebrate your dedication and make today a win!",
-        },
-      ],
-    },
-    {
       groupTitle: "K10 Questionnaire",
       data: [
         {
@@ -253,6 +223,36 @@ const OnBoardingPage = () => {
         },
       ],
     },
+    {
+      groupTitle: "Olivia Star",
+      data: [
+        {
+          title: "Post-Questionnaire Reassurance",
+          content:
+            "Thank you for your openness. You've earned 25 stars towards new sessions and resources.",
+        },
+        {
+          title: "Introduction to the Star System",
+          content:
+            "Earn stars for engagement and progress. They're milestones on your growth journey.",
+        },
+        {
+          title: "Encouragement and Motivation",
+          content:
+            "You're not alone. Your first step has earned you 15 stars towards meaningful progress.",
+        },
+        {
+          title: "Transition to Program Recommendation",
+          content:
+            "Let's explore tailored options for your well-being journey together.",
+        },
+        {
+          title: "Olivia's Daily Motivation and Reminder Prompt",
+          content:
+            "Each session you complete earns you a 'Star of Progress'. Let's celebrate your dedication and make today a win!",
+        },
+      ],
+    },
   ];
 
   useEffect(() => {
@@ -305,9 +305,11 @@ const OnBoardingPage = () => {
           mounted && (
             <OnBoarding
               onFinish={(res) => {
+                console.log("onboarding finish", res);
                 setIsFinish(true);
               }}
               groupData={onBoardingData}
+              startFrom={15}
             />
           )
         )}

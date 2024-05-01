@@ -1,16 +1,17 @@
 // theme/themeConfig.ts
 import type { ThemeConfig } from "antd";
+import { PRIMARY_COLOR } from "../tailwind.config";
 
 const theme: ThemeConfig = {
   token: {},
   components: {
     Button: {
-      colorPrimary: "#FD2D55",
-      colorPrimaryHover: "#FD2D55",
-      colorPrimaryActive: "#FD2D55",
+      colorPrimary: PRIMARY_COLOR,
+      colorPrimaryHover: PRIMARY_COLOR,
+      colorPrimaryActive: PRIMARY_COLOR,
     },
     Steps: {
-      colorPrimary: "#FD2D55",
+      colorPrimary: PRIMARY_COLOR,
     },
   },
 };

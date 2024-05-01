@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 
+export const PRIMARY_COLOR = "#FD2D55";
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -17,7 +19,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        primary: "#FD2D55",
+        primary: PRIMARY_COLOR,
       },
     },
   },

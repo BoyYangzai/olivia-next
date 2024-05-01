@@ -4,19 +4,26 @@ import { useEffect, useState } from "react";
 import { OnBoardingData, OnBoardingGroupData } from "./type";
 import OnBoardingItem from "./onBoardingItem";
 import Image from "next/image";
+import { PRIMARY_COLOR } from "../../tailwind.config";
 
 const OnBoarding = ({
   data,
   onFinish,
   animation,
   groupData,
+  startFrom = 0,
 }: {
   data?: OnBoardingData;
   groupData?: OnBoardingGroupData;
   onFinish?: (res: string[]) => void;
   animation?: "fade" | "slide";
+  startFrom?: number;
 }) => {
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    setIndex(startFrom);
+  }, [startFrom]);
 
   const mergedData =
     data ?? groupData?.flatMap((group) => group.data) ?? ([] as OnBoardingData);
@@ -59,11 +66,20 @@ const OnBoarding = ({
     }
   }, [selectedResult]);
 
+  const handleSkip = () => {
+    onFinish?.(selectedResult ?? []);
+  };
+
   return (
     <div className="w-full h-full flex-row justify-center items-start flex-wrap">
       <div className="w-full -translate-y-3">
-        <Progress percent={percent} strokeColor={"#ea445a"} showInfo={false} />
-        <div className="text-lg ml-2 md:hidden">
+        <Progress
+          percent={percent}
+          strokeColor={PRIMARY_COLOR}
+          showInfo={false}
+        />
+
+        <div className="flex justify-between text-lg ml-2 md:hidden">
           {index > 0 && (
             <div className="flex ">
               <Image
@@ -73,6 +89,14 @@ const OnBoarding = ({
                 height={20}
                 onClick={handleBack}
               ></Image>
+            </div>
+          )}
+          {index > 0 && (
+            <div
+              className="flex text-primary text-sm font-light cursor-pointer mr-4"
+              onClick={handleSkip}
+            >
+              Skip {">"}
             </div>
           )}
         </div>
