@@ -309,7 +309,7 @@ const OnBoardingPage = () => {
                 setIsFinish(true);
               }}
               groupData={onBoardingData}
-              startFrom={15}
+              startFrom={0}
             />
           )
         )}
